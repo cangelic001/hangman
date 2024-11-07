@@ -14,7 +14,7 @@ body {
     background-color: white;
   }
 
-  .game-container {
+.game-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,30 +33,19 @@ h1 {
     margin-bottom: 10px;
   }
 
-button {
-    margin-top: 20px;
-    padding: 10px 15px;
-  }
+#current-word {
+  font-size:40px;
+  color: #333;
+  margin: 15px 0;
+}
 
-#letter-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 20px;
-  }
+#alphabet-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-.letter-button {
-    padding: 10px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    width: 35px;
-    border-radius: 5px;
-  }
-
-  #alphabet-buttons button {
+#alphabet-buttons button {
     width: 35px;
     height: 35px;
     margin: 5px;
