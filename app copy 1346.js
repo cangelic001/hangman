@@ -6,8 +6,7 @@ let gameMessage = document.getElementById("game-message");
 let imageContainer = document.getElementById("image-container");
 let winLoseMessage = document.getElementById("win-lose-message");
 let showLetters = document.getElementById("show-letters");
-let wrongGuesses = 0;
-let display = "" ;
+let wrongGuesses = 0
 
 const maxWrongGuesses = 5;
 
@@ -15,39 +14,34 @@ startGame();
 
 // to start the game
 function startGame() {
-    
-    selectedWord = words[Math.floor(Math.random() * words.length)]; 
-    console.log(selectedWord);
-
-    gameMessage.textContent = "";
-    winLoseMessage.textContent = "";
-
+    // gameMessage = ""
+    winLoseMessage.textContent = ""
+    selectedWord = words[Math.floor(Math.random() * words.length)];
+    guessedLetters = [];
     changeWord();
     setupButtons();
-
-    wrongGuesses = 0;
-    hangmanStatus.textContent = "Wrong Attempt(s): " + wrongGuesses;
-
-    guessedLetters = [];
-    showLetters.textContent = "Letter(s) inputted :" ;
+    // showLetters = "";
+    // imageContainer.innerHTML = "";
 };
 
 // use selected word length, do loop for each letter in the word.
 function changeWord() {
-    display = "" ;
+    let display = "" ; 
 
-    for (let i = 0; i < selectedWord.length; i++) { 
+    for (let i = 0; i < selectedWord.length; i++) {
         let letter = selectedWord[i];
         if (guessedLetters.includes(letter)) {
-            display += letter; 
+            display += letter; // to do: put display to replace the paragraph in p with the id="alphabet-buttons"
         } else {
             display += "_";
         }
     }
 
     currentWord.textContent = display;
-    
-    checkWinLose(display);
+
+    if (!display.includes("_")) {
+        winLoseMessage.textContent = "You Win!";
+    }
 };
 
 // to check if letter inputted matches the one in the word
@@ -59,27 +53,20 @@ function checkLetter(event) {
         changeWord(); 
         gameMessage.textContent = "Good Guess!"
         showLetters.textContent = "Letters inputted : " + guessedLetters.join(", ");
-        imageContainer.innerHTML = ""
     } 
     else {
         wrongGuesses = wrongGuesses + 1;
-        hangmanStatus.textContent = "Wrong Attempt(s): " + wrongGuesses;
+        hangmanStatus.textContent = "Wrong Attempts: " + wrongGuesses;
         gameMessage.textContent = "Letter Does Not Exist in the Word!"
         guessedLetters.push(guessedLetter);
-        showLetters.textContent = "Letter(s) inputted : " + guessedLetters.join(", ");
+        showLetters.textContent = "Letters inputted : " + guessedLetters.join(", ");
 
-        replaceImage();
+        replaceImage(); // ----Added
 
-        checkWinLose(display);
-    }
-};
-
-function checkWinLose(display) {
-    if (!display.includes("_")) {
-        winLoseMessage.innerHTML = "You Win! <br>Click on the Restart Button Below";
-        imageContainer.innerHTML= "";
-    } else if (wrongGuesses === maxWrongGuesses) {
-        winLoseMessage.innerHTML = "You Lost! The word was " + selectedWord + "!<br>Press the Restart Game Button Below";
+        if (wrongGuesses === maxWrongGuesses) {
+            winLoseMessage.innerHTML = "You Lost! The word was " + selectedWord + "!<br>Press the Restart Game Button Below";
+            // startGame();
+        }
     }
 };
 
@@ -91,7 +78,6 @@ function setupButtons() {
     });
 };
 
-// change the image 
 function replaceImage() {
     const image = document.createElement("img");
     

@@ -1,3 +1,5 @@
+// b4 putting checkwinlose()
+
 const words = ["cow", "pig", "cat", "elk", "fox", "rat", "bee", "ant", "owl", "cod"];
 let guessedLetters = [];
 let currentWord = document.getElementById("current-word");
@@ -6,8 +8,7 @@ let gameMessage = document.getElementById("game-message");
 let imageContainer = document.getElementById("image-container");
 let winLoseMessage = document.getElementById("win-lose-message");
 let showLetters = document.getElementById("show-letters");
-let wrongGuesses = 0;
-let display = "" ;
+let wrongGuesses = 0
 
 const maxWrongGuesses = 5;
 
@@ -16,27 +17,23 @@ startGame();
 // to start the game
 function startGame() {
     
-    selectedWord = words[Math.floor(Math.random() * words.length)]; 
-    console.log(selectedWord);
+    selectedWord = words[Math.floor(Math.random() * words.length)];
+    guessedLetters = [];
 
-    gameMessage.textContent = "";
-    winLoseMessage.textContent = "";
+    gameMessage.textContent = ""
+    winLoseMessage.textContent = ""
 
     changeWord();
     setupButtons();
-
-    wrongGuesses = 0;
-    hangmanStatus.textContent = "Wrong Attempt(s): " + wrongGuesses;
-
-    guessedLetters = [];
-    showLetters.textContent = "Letter(s) inputted :" ;
+    // showLetters = "";
+    // imageContainer.innerHTML = "";
 };
 
 // use selected word length, do loop for each letter in the word.
 function changeWord() {
-    display = "" ;
+    let display = "" ; 
 
-    for (let i = 0; i < selectedWord.length; i++) { 
+    for (let i = 0; i < selectedWord.length; i++) {
         let letter = selectedWord[i];
         if (guessedLetters.includes(letter)) {
             display += letter; 
@@ -46,8 +43,11 @@ function changeWord() {
     }
 
     currentWord.textContent = display;
-    
-    checkWinLose(display);
+
+    if (!display.includes("_")) {
+        winLoseMessage.innerHTML = "You Win! <br>Click on the Restart Button Below";
+        imageContainer.innerHTML= "";
+    }
 };
 
 // to check if letter inputted matches the one in the word
@@ -59,7 +59,6 @@ function checkLetter(event) {
         changeWord(); 
         gameMessage.textContent = "Good Guess!"
         showLetters.textContent = "Letters inputted : " + guessedLetters.join(", ");
-        imageContainer.innerHTML = ""
     } 
     else {
         wrongGuesses = wrongGuesses + 1;
@@ -70,16 +69,10 @@ function checkLetter(event) {
 
         replaceImage();
 
-        checkWinLose(display);
-    }
-};
-
-function checkWinLose(display) {
-    if (!display.includes("_")) {
-        winLoseMessage.innerHTML = "You Win! <br>Click on the Restart Button Below";
-        imageContainer.innerHTML= "";
-    } else if (wrongGuesses === maxWrongGuesses) {
-        winLoseMessage.innerHTML = "You Lost! The word was " + selectedWord + "!<br>Press the Restart Game Button Below";
+        if (wrongGuesses === maxWrongGuesses) {
+            winLoseMessage.innerHTML = "You Lost! The word was " + selectedWord + "!<br>Press the Restart Game Button Below";
+            // startGame();
+        }
     }
 };
 

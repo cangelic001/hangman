@@ -33,6 +33,33 @@ h1 {
     margin-bottom: 10px;
   }
 
+#show-letters {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #fffaed;
+  width: 80%;
+}
+
+#image-container {
+  width: 300px;
+  height: auto;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+#max-attempts {
+  font-size: 12px;
+  color: #919191;
+}
+
+#hangman-status {
+  font-size: 12px;
+  color: #0d00ff;
+}
+
 #current-word {
   font-size:40px;
   color: #333;
@@ -57,8 +84,15 @@ h1 {
   
   #game-message {
     font-size: 18px;
-    color: #d9534f;
-    margin-top: 10px;
+    color: #0008ff;
+    margin-top: 20px;
+  }
+
+  #win-lose-message {
+    font-size: 30px;
+    color: #ff0000;
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
   
   #restart-btn {
