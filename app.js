@@ -21,6 +21,7 @@ function startGame() {
 
     gameMessage.textContent = "";
     winLoseMessage.textContent = "";
+    imageContainer.innerHTML = "";
 
     changeWord();
     setupButtons();
